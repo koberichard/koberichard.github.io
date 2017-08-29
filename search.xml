@@ -3,6 +3,70 @@
   
     
     <entry>
+      <title><![CDATA[为Hexo博客添加目录]]></title>
+      <url>/2017/08/29/3/</url>
+      <content type="html"><![CDATA[<p>#为Hexo博客添加目录</p>
+<p>   Hexo博客系统的核心支持生成目录（Table of Contents），但其默认的主题Landscape并不支持目录的显示。我们只需对Landscape的主题文件稍作修改并添加一点目录的CSS就可以在文章前面显示友好的目录了。</p>
+<p>##修改Landscape主题的ejs文件</p>
+<p>   我们首先要编辑文章显示页面的模板，也就是themes/landscape/layout/_partial/article.ejs文件。为了将目录生成在正文之前，我们首先在这个文件中找到&lt;%- post.content %&gt;，并在这一行之前加入如下代码：</p>
+<pre><code>&lt;!-- Table of Contents --&gt;
+&lt;% if (!index &amp;&amp; post.toc){ %&gt;
+ &lt;div id=&quot;toc&quot; class=&quot;toc-article&quot;&gt;
+   &lt;strong class=&quot;toc-title&quot;&gt;文章目录&lt;/strong&gt;
+   &lt;%- toc(post.content) %&gt;
+ &lt;/div&gt;
+&lt;% } %
+</code></pre><p>  这段代码的含义清晰明了，if语句中有两个条件，!index是为了不在首页的文章摘要中生成目录，post.toc确保了只在显式地标记了toc: true的文章中生成目录。若这两个条件满足，则创建一个目录的<div>。</div></p>
+<p>  修改完这个文件之后，找一篇包含了多个子标题的文章，并在文章开头的front-matter中添加一句toc: true，在浏览器中访问这篇文章，应该可以看到文章的开头处已经有了带链接的目录。但是这样的目录实在太难看，我们还需要添加相应的CSS来将其指定为我们想要的样式。</p>
+<p>##为目录编写CSS文件</p>
+<p>  要指定目录的样式，我们要修改的文件是themes/landscape/source/css/_partial/article.styl。在文件的最后，添加如下代码：</p>
+<pre><code>/*toc*/
+.toc-article
+  background #eee
+  border 1px solid #bbb
+  border-radius 10px
+  margin 1.5em 0 0.3em 1.5em
+  padding 1.2em 1em 0 1em
+  max-width 28%
+.toc-title
+  font-size 120%
+#toc
+  line-height 1em
+  font-size 0.9em
+  float right
+  .toc
+    padding 0
+    margin 1em
+    line-height 1.8em
+    li
+      list-style-type none
+  .toc-child 
+    margin-left 1em
+</code></pre><p>  第一段的toc-article指定了目录整个<div>的背景色、边框色、倒角半径、各种间距以及最大的宽度。注意这里最好指定目录的最大宽度，我将其设为了28%，也就是文章正文那个框的宽度的28%，也可以设为一个固定的长度，比如在笔记本电脑上16em就是个不错的宽度，但为了能适配各种不同尺寸的屏幕，最好还是设置为百分比。如果不指定最大宽度，遇到比较长的标题时，生成的目录会非常难看。这个最大宽度的设置是我在网上其他添加目录的方法中没有见到的。</div></p>
+<p>  第二段的toc-title指的就是“文章目录”那四个字，这四个字要比其他字大一些，将其字号设为其他字的120%。</p>
+<p>  第三段的#toc.toc指定了目录列表的一些细节，将font-size设为0.9em会让目录的字比文章的字稍小一些。最后的.toc-child指定了二级目录的缩进量。</p>
+<p>  再次生成页面，应该已经可以显示比较美观的目录了。</p>
+<p>##收尾工作</p>
+<p>  通常情况下我们不需要为每一篇文章都添加目录，因为大部分文章的长度还是相对较短，或者结构简单而没有添加小标题。在我的博客上，需要添加目录的长文还是相对较少的。因为我选择了默认不生成目录，而手动为需要目录的文章添加显式地标记。</p>
+<p>  下面我就需要编辑每一篇需要添加目录的文章，在文章开头的front-matter中加入toc: true。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> hexo </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[基于hexo+github的博客迁移]]></title>
       <url>/2017/08/29/22/</url>
       <content type="html"><![CDATA[<p>hexo官方给了一些迁移的方法，不过它上面介绍的方法都是把博客文章从hexo系统迁移到其他博客系统的方法。然而我们这里要讨论的是：</p>
@@ -203,6 +267,78 @@ $ hexo d             //重新部署到服务器
 
 1元搭建自己的云服务器~~搭建好这个博客，满满的成就感。祝大家节日快乐~~
 </code></pre>]]></content>
+      
+        <categories>
+            
+            <category> hexo </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Hexo 最常用的几个命令]]></title>
+      <url>/2015/12/21/common-hexo-commands/</url>
+      <content type="html"><![CDATA[<style>
+    .article-entry h2 {
+        border-bottom: none;
+    }
+</style>
+
+<p>　　Hexo 约有二十个命令，但普通用户经常使用的大概只有下列几个: </p>
+<a id="more"></a>
+<h2 id="hexo-s"><a href="#hexo-s" class="headerlink" title="hexo s"></a>hexo s</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo s</div></pre></td></tr></table></figure>
+<p>启动本地服务器，用于预览主题。默认地址： <a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a></p>
+<ul>
+<li><code>hexo s</code> 是 <code>hexo server</code> 的缩写，命令效果一致；</li>
+<li>预览的同时可以修改文章内容或主题代码，保存后刷新页面即可；</li>
+<li>对 Hexo 根目录 <code>_config.yml</code> 的修改，需要重启本地服务器后才能预览效果。</li>
+</ul>
+<h2 id="hexo-n"><a href="#hexo-n" class="headerlink" title="hexo n"></a>hexo n</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo n &quot;学习笔记  六&quot;</div></pre></td></tr></table></figure>
+<p>新建一篇标题为 <code>学习笔记  六</code> 的文章，因为标题里有空格，所以加上了引号。</p>
+<ul>
+<li>文章标题可以在对应 md 文件里改，新建时标题可以写的简单些；</li>
+<li><code>hexo n</code> 是 <code>hexo new</code> 的缩写，命令效果一致。</li>
+</ul>
+<h2 id="hexo-d"><a href="#hexo-d" class="headerlink" title="hexo d"></a>hexo d</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo d</div></pre></td></tr></table></figure>
+<p>自动生成网站静态文件，并部署到设定的仓库。</p>
+<ul>
+<li><code>hexo d</code> 是 <code>hexo deploy</code> 的缩写，命令效果一致。</li>
+</ul>
+<h2 id="hexo-clean"><a href="#hexo-clean" class="headerlink" title="hexo clean"></a>hexo clean</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo clean</div></pre></td></tr></table></figure>
+<p>清除缓存文件 <code>db.json</code> 和已生成的静态文件 <code>public</code>。</p>
+<ul>
+<li>网站显示异常时可以执行这条命令试试。</li>
+</ul>
+<h2 id="hexo-g"><a href="#hexo-g" class="headerlink" title="hexo g"></a>hexo g</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo g</div></pre></td></tr></table></figure>
+<p>生成网站静态文件到默认设置的 <code>public</code> 文件夹。</p>
+<ul>
+<li>便于查看网站生成的静态文件或者手动部署网站；</li>
+<li>如果使用自动部署，不需要先执行该命令；</li>
+<li><code>hexo g</code> 是 <code>hexo generate</code> 的缩写，命令效果一致。</li>
+</ul>
+<h2 id="hexo-n-page"><a href="#hexo-n-page" class="headerlink" title="hexo n page"></a>hexo n page</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo n page aboutme</div></pre></td></tr></table></figure>
+<p>新建一个标题为 <code>aboutme</code> 的页面，默认链接地址为 <code>主页地址/aboutme/</code></p>
+<ul>
+<li>标题可以为中文，但一般习惯用英文；</li>
+<li>页面标题和文章一样可以随意修改；</li>
+<li>页面不会出现在首页文章列表和归档中，也不支持设置分类和标签。</li>
+</ul>
+<h2 id="常用组合"><a href="#常用组合" class="headerlink" title="常用组合"></a>常用组合</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo clean &amp;&amp; hexo s</div><div class="line">hexo clean &amp;&amp; hexo d</div></pre></td></tr></table></figure>
+<p>可以用输入法等软件为这些命令设置快捷键，方便调用。</p>
+<h2 id="相关说明"><a href="#相关说明" class="headerlink" title="相关说明"></a>相关说明</h2><ul>
+<li>以上命令使用基于 Hexo 3.1.1 版本；</li>
+<li>需要删掉用命令新建的文章或页面时，只需要进入 Hexo 根目录下的 <code>source</code> 文件夹，删除对应文件或文件夹即可；</li>
+<li>更多命令用法请查询 <a href="https://hexo.io/zh-cn/docs/commands.html" target="_blank" rel="external">官方文档</a>。</li>
+</ul>
+]]></content>
       
         <categories>
             
