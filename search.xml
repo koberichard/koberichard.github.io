@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+    
+    <entry>
+      <title><![CDATA[基于hexo+github搭建一个独立博客]]></title>
+      <url>/2017/08/29/article_20180829-1/</url>
+      <content type="html"><![CDATA[<p>#基于hexo+github搭建一个独立博客</p>
+<hr>
+<pre><code>一直听说用 **hexo** 搭建一个拥有自己域名的博客是很酷炫的事情~，在这十一花上半个小时整个hexo博客岂不美哉。
+使用Hexo吸引我的是，其简单优雅, 而且风格多变, 适合程序员搭建个人博客,而且支持多平台的搭建，再加上有些node,git基础，分分钟创建出一个高大上的博客。废话少说，开始吧。
+</code></pre><blockquote>
+<p><strong>准备工作</strong></p>
+</blockquote>
+<ul>
+<li>node：用来生成静态页面的 到Node.js官网下载相应平台的最新版本，一路安装即可。</li>
+<li>git: 把本地的hexo内容提交到github上去.没有安装的可以看此教程。</li>
+<li>github：用来做博客的远程创库、域名、服务器。（~不多说了）<br> 然后你还要知道一点点linux命令，域名解析相关知识（以上条件你都达到了，那么恭喜你30分钟搭建倒计时开始~）</li>
+</ul>
+<blockquote>
+<p><strong>安装Hexo</strong></p>
+</blockquote>
+<p>（本人是Mac系统，其他系统的朋友这部分可以看官网教程）<br>当Node.js和Git都安装好后就可以正式安装Hexo了，终端执行如下命令：</p>
+<pre><code>sudo npm install -g hexo
+</code></pre><p>输入管理员密码即开始安装</p>
+<blockquote>
+<p><strong>初始化</strong></p>
+</blockquote>
+<p> 终端cd到一个你选定的目录（比如创建一个blog文件，$cd blog），执行hexo init命令：</p>
+<pre><code>hexo init
+</code></pre><p>在blog目录下，执行如下命令，安装npm：</p>
+<pre><code>npm install
+</code></pre><p>执行如下命令，开启hexo服务器：</p>
+<pre><code>hexo s
+</code></pre><p>此时，浏览器中打开网址<a href="http://localhost:4000，能看到如下页面：" target="_blank" rel="external">http://localhost:4000，能看到如下页面：</a></p>
+<p><img src="/2017/08/29/article_20180829-1/hexo_helloworld.png" alt="logo"></p>
+<p>本地设置好后，接下来开始关联Github。</p>
+<blockquote>
+<p><strong>创建仓库</strong></p>
+</blockquote>
+]]></content>
+      
+        <categories>
+            
+            <category> hexo </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[基于hexo+github的博客迁移]]></title>
+      <url>/2017/08/29/22/</url>
+      <content type="html"><![CDATA[<p>hexo官方给了一些迁移的方法，不过它上面介绍的方法都是把博客文章从hexo系统迁移到其他博客系统的方法。然而我们这里要讨论的是：</p>
+<p>当我们更换电脑的时候我们应该怎么办？</p>
+<p>所以默认你已经成功利用hexo和github发布博客，如果还没有，可以看一下教程</p>
+<p>具体的思路是：在生成的已经推到github上的hexo静态代码出建立一个分支，利用这个分支来管理自己hexo的源文件。</p>
+<p>如果能在刚刚配置hexo的时候就想好以后的迁移的问题就太好了，可以省掉很多麻烦，可实际使用中，刚刚配置hexo的时候，好多人都是初学，不会想到以后的问题，我就是这样的。</p>
+<p>具体的操作：</p>
+<p>克隆gitHub上面生成的静态文件到本地</p>
+<pre><code>git clone https://github.com/yourname/hexo-test.github.io.git
+</code></pre><p>把克隆到本地的文件除了git的文件都删掉，找不到git的文件的话就到删了吧。不要用hexo init初始化。</p>
+<p>将之前使用hexo写博客时候的整个目录（所有文件）搬过来。把该忽略的文件忽略了</p>
+<pre><code>touch .gitignore
+</code></pre><p>创建一个叫hexo的分支</p>
+<p>git checkout -b hexo<br>提交复制过来的文件到暂存区</p>
+<pre><code>git add --all
+</code></pre><p>提交</p>
+<pre><code>git commit -m &quot;新建分支源文件&quot;
+</code></pre><p>推送分支到github</p>
+<pre><code>git push --set-upstream origin hexo
+</code></pre><p>到这里基本上就搞定了，以后再推就可以直接git push了，hexo的操作跟以前一样。</p>
+<p>今后无论什么时候想要在其他电脑上面用hexo写博客，就直接把创建的分支克隆下来，npm install安装依赖之后就可以用了。</p>
+<p>克隆分支的操作</p>
+<pre><code>git clone -b hexo https://github.com/yourname/hexo-test.github.io.git
+</code></pre><p>因为上面创建的是一个名字叫hexo的分支，所以这里-b后面的是hexo，再把后面的gitHub的地址换成你自己的hexo博客的地址就可以了。</p>
+<p>这样做完了以后，每次写完博客发布之后不要忘了还要git push把源文件推到分支上。</p>
+<p>博客：<a href="https://zhuanyongxigua.github.io" target="_blank" rel="external">https://zhuanyongxigua.github.io</a></p>
+<p>转载自：<br>作者：砖用冰西瓜<br>链接：<a href="http://www.jianshu.com/p/beb8d611340a" target="_blank" rel="external">http://www.jianshu.com/p/beb8d611340a</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> hexo </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+        
+    </entry>
+    
+  
+  
+</search>

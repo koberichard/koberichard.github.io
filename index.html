@@ -201,10 +201,6 @@
                     
                       <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
                     
-                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
-                    
-                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
-                    
                     </div>
                 </section>
                 
@@ -213,7 +209,7 @@
                 
                 <section class="switch-part switch-part4">
                 
-                    <div id="js-aboutme">专注于前端</div>
+                    <div id="js-aboutme">koberichard</div>
                 </section>
                 
             </div>
@@ -335,6 +331,95 @@
 
 
   
+    <article id="post-22" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/08/29/22/" class="article-date">
+      <time datetime="2017-08-29T04:24:37.000Z" itemprop="datePublished">2017-08-29</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/29/22/">基于hexo+github的博客迁移</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>hexo官方给了一些迁移的方法，不过它上面介绍的方法都是把博客文章从hexo系统迁移到其他博客系统的方法。然而我们这里要讨论的是：</p>
+<p>当我们更换电脑的时候我们应该怎么办？</p>
+<p>所以默认你已经成功利用hexo和github发布博客，如果还没有，可以看一下教程</p>
+<p>具体的思路是：在生成的已经推到github上的hexo静态代码出建立一个分支，利用这个分支来管理自己hexo的源文件。</p>
+<p>如果能在刚刚配置hexo的时候就想好以后的迁移的问题就太好了，可以省掉很多麻烦，可实际使用中，刚刚配置hexo的时候，好多人都是初学，不会想到以后的问题，我就是这样的。</p>
+<p>具体的操作：</p>
+<p>克隆gitHub上面生成的静态文件到本地</p>
+<pre><code>git clone https://github.com/yourname/hexo-test.github.io.git
+</code></pre><p>把克隆到本地的文件除了git的文件都删掉，找不到git的文件的话就到删了吧。不要用hexo init初始化。</p>
+<p>将之前使用hexo写博客时候的整个目录（所有文件）搬过来。把该忽略的文件忽略了</p>
+<pre><code>touch .gitignore
+</code></pre><p>创建一个叫hexo的分支</p>
+<p>git checkout -b hexo<br>提交复制过来的文件到暂存区</p>
+<pre><code>git add --all
+</code></pre><p>提交</p>
+<pre><code>git commit -m &quot;新建分支源文件&quot;
+</code></pre><p>推送分支到github</p>
+<pre><code>git push --set-upstream origin hexo
+</code></pre><p>到这里基本上就搞定了，以后再推就可以直接git push了，hexo的操作跟以前一样。</p>
+<p>今后无论什么时候想要在其他电脑上面用hexo写博客，就直接把创建的分支克隆下来，npm install安装依赖之后就可以用了。</p>
+<p>克隆分支的操作</p>
+<pre><code>git clone -b hexo https://github.com/yourname/hexo-test.github.io.git
+</code></pre><p>因为上面创建的是一个名字叫hexo的分支，所以这里-b后面的是hexo，再把后面的gitHub的地址换成你自己的hexo博客的地址就可以了。</p>
+<p>这样做完了以后，每次写完博客发布之后不要忘了还要git push把源文件推到分支上。</p>
+<p>博客：<a href="https://zhuanyongxigua.github.io" target="_blank" rel="external">https://zhuanyongxigua.github.io</a></p>
+<p>转载自：<br>作者：砖用冰西瓜<br>链接：<a href="http://www.jianshu.com/p/beb8d611340a" target="_blank" rel="external">http://www.jianshu.com/p/beb8d611340a</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/hexo/">hexo</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
   
 </div>
       <footer id="footer">
@@ -401,22 +486,7 @@
 <script>
     // Open in New Window
     
-        var oOpenInNew = {
-            
-             title: "a.article-title, .article-more-link a", 
-             post: ".article-entry a[href], .copyright a[href]", 
-             tags: ".article-tag a", 
-             categories: ".article-category a, a.tag-list-link", 
-             articleNav: "#article-nav a, #post-nav-button a", 
-             archives: ".archive-article-title", 
-             miniArchives: "a.post-list-link", 
-             menu: ".header-menu a", 
-             friends: "#js-friends a", 
-             socail: ".social a" 
-        }
-        for (var x in oOpenInNew) {
-            $(oOpenInNew[x]).attr("target", "_blank");
-        }
+        $("a[target=_blank]").removeAttr("target");
     
 </script>
 

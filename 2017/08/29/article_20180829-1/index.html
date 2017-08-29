@@ -203,10 +203,6 @@
                     
                       <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
                     
-                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
-                    
-                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
-                    
                     </div>
                 </section>
                 
@@ -215,7 +211,7 @@
                 
                 <section class="switch-part switch-part4">
                 
-                    <div id="js-aboutme">专注于前端</div>
+                    <div id="js-aboutme">koberichard</div>
                 </section>
                 
             </div>
@@ -368,6 +364,17 @@
 
 
 
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/08/29/22/">
+                    基于hexo+github的博客迁移
+                </a>
+            </div>
+        
+    </nav>
+
   
 </article>
 
@@ -436,11 +443,13 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2017/08/29/22/" title="下一篇: 基于hexo+github的博客迁移">
+                <i class="fa fa-angle-right"></i>
+            </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/08/29/article_20180829-1/">基于hexo+github搭建一个独立博客</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/08/29/article_20180829-1/">基于hexo+github搭建一个独立博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/29/22/">基于hexo+github的博客迁移</a></li></ul>
 
 
 
@@ -513,22 +522,7 @@
 <script>
     // Open in New Window
     
-        var oOpenInNew = {
-            
-             title: "a.article-title, .article-more-link a", 
-             post: ".article-entry a[href], .copyright a[href]", 
-             tags: ".article-tag a", 
-             categories: ".article-category a, a.tag-list-link", 
-             articleNav: "#article-nav a, #post-nav-button a", 
-             archives: ".archive-article-title", 
-             miniArchives: "a.post-list-link", 
-             menu: ".header-menu a", 
-             friends: "#js-friends a", 
-             socail: ".social a" 
-        }
-        for (var x in oOpenInNew) {
-            $(oOpenInNew[x]).attr("target", "_blank");
-        }
+        $("a[target=_blank]").removeAttr("target");
     
 </script>
 
