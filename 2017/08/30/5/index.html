@@ -15,13 +15,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/2015/12/index.html">
+<meta name="description" content="mysql导出功能">
+<meta name="keywords" content="mysql 数据库 存储过程 到粗">
+<meta property="og:type" content="article">
+<meta property="og:title" content="查询并导出、导入mysql中的存储过程">
+<meta property="og:url" content="http://yoursite.com/2017/08/30/5/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="mysql导出功能">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-08-30T05:10:28.986Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="查询并导出、导入mysql中的存储过程">
+<meta name="twitter:description" content="mysql导出功能">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -53,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Archives: 2015/12 | Hexo</title>
+<title>查询并导出、导入mysql中的存储过程 | Hexo</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -63,8 +68,8 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: false,
-        isArchive: true,
+        isPost: true,
+        isArchive: false,
         isTag: false,
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
@@ -185,7 +190,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql-数据库/">mysql 数据库</a></li></ul>
                     </div>
                 </section>
                 
@@ -256,60 +261,186 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-5" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2015/12/21/common-hexo-commands/" class="archive-article-date">
-      <time datetime="2015-12-21T14:12:04.000Z" itemprop="datePublished">12-21</time>
+    <div class="article-meta">
+      <a href="/2017/08/30/5/" class="article-date">
+      <time datetime="2017-08-30T05:06:22.000Z" itemprop="datePublished">2017-08-30</time>
 </a>
 
 
-        </div>
-         
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/21/common-hexo-commands/">Hexo 最常用的几个命令</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      查询并导出、导入mysql中的存储过程
     </h1>
   
 
-        <div class="article-info info-on-archive">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/hexo/">hexo</a>
+    <a class="article-category-link" href="/categories/mysql/">mysql</a>
     </div>
 
 
-          
+        
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql-数据库/">mysql 数据库</a></li></ul>
     </div>
 
-        </div>
         <div class="clearfix"></div>
-    </header>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+		<!-- Table of Contents -->
+		
+        <h1 id="查询并导出、导入mysql中的存储过程"><a href="#查询并导出、导入mysql中的存储过程" class="headerlink" title="查询并导出、导入mysql中的存储过程"></a>查询并导出、导入mysql中的存储过程</h1><blockquote>
+<p>查看指定的存储过程内容：</p>
+</blockquote>
+<p>  <code>select body from mysql.proc where name=&#39;procedurename&#39;;</code></p>
+<blockquote>
+<p>查看所有的存储过程：</p>
+</blockquote>
+<p>  <code>show procedure status;</code></p>
+<blockquote>
+<p>导出MySQL的存储过程</p>
+</blockquote>
+<p>  <code>mysqldump -uroot -p -hlocalhost -P3306 -n -d -t -R DBName &gt; procedurename.sql</code></p>
+<p>  参数说明：<br>  -n:   –no-create-db<br>  -d:   –no-data<br>  -t:   –no-create-info<br>  -R:   –routines      Dump stored routines (functions and procedures)<br>  主要参数介绍：<br>  字符集选项<br>  –default–character-set=xx<br>  连接选项<br>  -u,–user=name<br>  -p,–password=name<br>  -h,–host=name<br>  -P,–port=#<br>  输出内容选项<br>  –add-drop-database<br>  –add-drop-table<br>  -n;–no-create-db<br>  -d;–no-data<br>  -t;–no-create-info<br>  输出格式选项<br>  –compact<br>  -c –complete-insert<br>  -T（指定数据表中的数据备份为单纯的数据文件和建表SQL两个文件）<br>  注xx.sql建表文件是以linux的root用户创建，<br>  而xx.txt文件则是一linux的mysql用户创建，<br>  因此这两个文件的存放路径一定要保证mysql用户有读写创建文件的权限。<br>  –fields-terminated-by=name（域分隔符）<br>  –fields-enclosed-by=name（域引用符）<br>  –fields-optionally-enclosed-by=name（域引用可选字符）<br>  –fields-escaped-by=name(转义字符)<br>  其他<br>  -F –flush-logs（备份前刷新日志）<br>  -l –lock-tables(给所有的表加读锁)</p>
+<blockquote>
+<p>导入MySQL的存储过程</p>
+</blockquote>
+<p>  <code>mysql -hhostname -uusername - ppassword databasename &lt; backupfile.sql</code></p>
+
+      
+    </div>
+    
   </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/08/30/5/">查询并导出、导入mysql中的存储过程</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">koberichard</a></p>
+        <p><span>发布时间:</span>2017-08-30, 13:06:22</p>
+        <p><span>最后更新:</span>2017-08-30, 13:10:28</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/08/30/5/" title="查询并导出、导入mysql中的存储过程">http://yoursite.com/2017/08/30/5/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/08/30/5/　　作者: koberichard" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/08/29/common-hexo-commands/">
+                    Hexo 最常用的几个命令
+                </a>
+            </div>
+        
+    </nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#查询并导出、导入mysql中的存储过程"><span class="toc-number">1.</span> <span class="toc-text">查询并导出、导入mysql中的存储过程</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"查询并导出、导入mysql中的存储过程　| Hexo　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
 
     
 
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/08/29/common-hexo-commands/" title="下一篇: Hexo 最常用的几个命令">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/08/30/5/">查询并导出、导入mysql中的存储过程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/29/common-hexo-commands/">Hexo 最常用的几个命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/29/3/">为Hexo博客添加目录</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/29/22/">基于hexo+github的博客迁移</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/29/article_20180829-1/">基于hexo+github搭建一个独立博客</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
 </div>
       <footer id="footer">
     <div class="outer">
