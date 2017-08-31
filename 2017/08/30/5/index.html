@@ -15,18 +15,18 @@
 
 
 
-<meta name="description" content="mysql导出功能">
+<meta name="description" content="mysql导出、导出功能">
 <meta name="keywords" content="mysql 数据库 存储过程 到粗">
 <meta property="og:type" content="article">
-<meta property="og:title" content="查询并导出、导入mysql中的存储过程">
+<meta property="og:title" content="mysql中mysqldump命令说明">
 <meta property="og:url" content="http://yoursite.com/2017/08/30/5/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="mysql导出功能">
+<meta property="og:description" content="mysql导出、导出功能">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-30T05:10:28.986Z">
+<meta property="og:updated_time" content="2017-08-30T05:39:58.022Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="查询并导出、导入mysql中的存储过程">
-<meta name="twitter:description" content="mysql导出功能">
+<meta name="twitter:title" content="mysql中mysqldump命令说明">
+<meta name="twitter:description" content="mysql导出、导出功能">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -58,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>查询并导出、导入mysql中的存储过程 | Hexo</title>
+<title>mysql中mysqldump命令说明 | Hexo</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -168,8 +168,6 @@
                         
                             <li><a href="/archives/">文  章</a></li>
                         
-                            <li><a href="/categories/">分  类</a></li>
-                        
                             <li><a href="/tags/">标签云</a></li>
                         
                             <li><a href="/about/">关于我</a></li>
@@ -239,8 +237,6 @@
                 
                     <li><a href="/archives/">文  章</a></li>
                 
-                    <li><a href="/categories/">分  类</a></li>
-                
                     <li><a href="/tags/">标签云</a></li>
                 
                     <li><a href="/about/">关于我</a></li>
@@ -280,7 +276,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      查询并导出、导入mysql中的存储过程
+      mysql中mysqldump命令说明
     </h1>
   
 
@@ -307,7 +303,7 @@
           
 		<!-- Table of Contents -->
 		
-        <h1 id="查询并导出、导入mysql中的存储过程"><a href="#查询并导出、导入mysql中的存储过程" class="headerlink" title="查询并导出、导入mysql中的存储过程"></a>查询并导出、导入mysql中的存储过程</h1><blockquote>
+        <h1 id="mysql中mysqldump命令说明"><a href="#mysql中mysqldump命令说明" class="headerlink" title="mysql中mysqldump命令说明"></a>mysql中mysqldump命令说明</h1><blockquote>
 <p>查看指定的存储过程内容：</p>
 </blockquote>
 <p>  <code>select body from mysql.proc where name=&#39;procedurename&#39;;</code></p>
@@ -319,7 +315,56 @@
 <p>导出MySQL的存储过程</p>
 </blockquote>
 <p>  <code>mysqldump -uroot -p -hlocalhost -P3306 -n -d -t -R DBName &gt; procedurename.sql</code></p>
-<p>  参数说明：<br>  -n:   –no-create-db<br>  -d:   –no-data<br>  -t:   –no-create-info<br>  -R:   –routines      Dump stored routines (functions and procedures)<br>  主要参数介绍：<br>  字符集选项<br>  –default–character-set=xx<br>  连接选项<br>  -u,–user=name<br>  -p,–password=name<br>  -h,–host=name<br>  -P,–port=#<br>  输出内容选项<br>  –add-drop-database<br>  –add-drop-table<br>  -n;–no-create-db<br>  -d;–no-data<br>  -t;–no-create-info<br>  输出格式选项<br>  –compact<br>  -c –complete-insert<br>  -T（指定数据表中的数据备份为单纯的数据文件和建表SQL两个文件）<br>  注xx.sql建表文件是以linux的root用户创建，<br>  而xx.txt文件则是一linux的mysql用户创建，<br>  因此这两个文件的存放路径一定要保证mysql用户有读写创建文件的权限。<br>  –fields-terminated-by=name（域分隔符）<br>  –fields-enclosed-by=name（域引用符）<br>  –fields-optionally-enclosed-by=name（域引用可选字符）<br>  –fields-escaped-by=name(转义字符)<br>  其他<br>  -F –flush-logs（备份前刷新日志）<br>  -l –lock-tables(给所有的表加读锁)</p>
+<p>  参数说明：</p>
+<pre><code>-n:   --no-create-db
+-d:   --no-data
+-t:   --no-create-info
+-R:   --routines      Dump stored routines (functions and procedures)
+</code></pre><p>  主要参数介绍：<br>    字符集选项</p>
+<pre><code>--default--character-set=xx
+
+连接选项
+
+  -u,--user=name
+  -p,--password=name
+  -h,--host=name
+  -P,--port=#
+
+输出内容选项
+
+  --add-drop-database
+  --add-drop-table
+  -n;--no-create-db
+  -d;--no-data
+  -t;--no-create-info
+
+输出格式选项
+
+  --compact
+  -c --complete-insert
+  -T（指定数据表中的数据备份为单纯的数据文件和建表SQL两个文件）
+
+注xx.sql建表文件是以linux的root用户创建，
+而xx.txt文件则是一linux的mysql用户创建，
+因此这两个文件的存放路径一定要保证mysql用户有读写创建文件的权限。
+
+  --fields-terminated-by=name（域分隔符）
+  --fields-enclosed-by=name（域引用符）
+  --fields-optionally-enclosed-by=name（域引用可选字符）
+  --fields-escaped-by=name(转义字符)
+
+其他
+
+  -F --flush-logs（备份前刷新日志）
+  -l --lock-tables(给所有的表加读锁)
+</code></pre><p>  1.导出整个数据库</p>
+<pre><code>mysqldump -u用户名 -p密码  数据库名 &gt; 导出的文件名
+</code></pre><p>  2.导出一个表，包括表结构和数据</p>
+<pre><code>mysqldump -u用户名 -p 密码  数据库名 表名&gt; 导出的文件名
+</code></pre><p>  3.导出一个数据库结构</p>
+<pre><code>mysqldump -u用户名 -p 密码 -d 数据库名 &gt; 导出的文件名
+</code></pre><p>  4.导出一个表，只有表结构</p>
+<p>  　　mysqldump -u用户名 -p 密码 -d 数据库名  表名&gt; 导出的文件名</p>
 <blockquote>
 <p>导入MySQL的存储过程</p>
 </blockquote>
@@ -332,12 +377,12 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/08/30/5/">查询并导出、导入mysql中的存储过程</a></p>
+        <p><span>本文标题:</span><a href="/2017/08/30/5/">mysql中mysqldump命令说明</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">koberichard</a></p>
         <p><span>发布时间:</span>2017-08-30, 13:06:22</p>
-        <p><span>最后更新:</span>2017-08-30, 13:10:28</p>
+        <p><span>最后更新:</span>2017-08-30, 13:39:58</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/08/30/5/" title="查询并导出、导入mysql中的存储过程">http://yoursite.com/2017/08/30/5/</a>
+            <span>原始链接:</span><a class="post-url" href="/2017/08/30/5/" title="mysql中mysqldump命令说明">http://yoursite.com/2017/08/30/5/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/08/30/5/　　作者: koberichard" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -365,7 +410,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#查询并导出、导入mysql中的存储过程"><span class="toc-number">1.</span> <span class="toc-text">查询并导出、导入mysql中的存储过程</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#mysql中mysqldump命令说明"><span class="toc-number">1.</span> <span class="toc-text">mysql中mysqldump命令说明</span></a></li></ol>
         
     </div>
     <style>
@@ -401,7 +446,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"查询并导出、导入mysql中的存储过程　| Hexo　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"mysql中mysqldump命令说明　| Hexo　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -433,7 +478,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/08/30/5/">查询并导出、导入mysql中的存储过程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/29/common-hexo-commands/">Hexo 最常用的几个命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/29/3/">为Hexo博客添加目录</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/29/22/">基于hexo+github的博客迁移</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/29/article_20180829-1/">基于hexo+github搭建一个独立博客</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/08/30/5/">mysql中mysqldump命令说明</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/29/common-hexo-commands/">Hexo 最常用的几个命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/29/3/">为Hexo博客添加目录</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/29/22/">基于hexo+github的博客迁移</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/29/article_20180829-1/">基于hexo+github搭建一个独立博客</a></li></ul>
 
 
 
@@ -447,7 +492,7 @@
         <div id="footer-info">
             <div class="footer-left">
                 <i class="fa fa-copyright"></i> 
-                2016-2017 koberichard
+                2017 koberichard
             </div>
             <div class="footer-right">
                 <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
